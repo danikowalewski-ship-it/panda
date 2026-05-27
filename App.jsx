@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
-
-// Twoja skonfigurowana baza danych
-const firebaseConfig = {
-  apiKey: "AIzaSyDeQJ43kDvwmqCDUFcJUCiKb3YMQOz0rhE",
-  authDomain: "pandyhub-cafbf.firebaseapp.com",
-  projectId: "pandyhub-cafbf",
-  storageBucket: "pandyhub-cafbf.firebasestorage.app",
-  messagingSenderId: "225685206678",
-  appId: "1:225685206678:web:c0d81274e6392979d734b7",
-  measurementId: "G-5EQXZ361L7"
-};
-
-// Inicjalizacja
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState('home');
+
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial', textAlign: 'center' }}>
+    <div style={{ fontFamily: 'sans-serif', maxWidth: '500px', margin: '0 auto', textAlign: 'center' }}>
       <h1>🐼 PandyHub</h1>
-      <p>Witaj w naszej wspólnej aplikacji!</p>
-      <div style={{ marginTop: '20px', padding: '20px', background: '#f0f0f0', borderRadius: '15px' }}>
-        <h3>Tu wkrótce pojawi się mapa naszej lokalizacji</h3>
-        <p>Pracujemy nad tym, żebyśmy zawsze wiedzieli, gdzie jesteśmy!</p>
+      
+      {/* Nawigacja */}
+      <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px 0' }}>
+        <button onClick={() => setActiveTab('home')}>🏠</button>
+        <button onClick={() => setActiveTab('mapa')}>📍</button>
+        <button onClick={() => setActiveTab('zadania')}>✅</button>
+        <button onClick={() => setActiveTab('quiz')}>❓</button>
+      </div>
+
+      {/* Treść */}
+      <div style={{ padding: '20px', background: '#f9f9f9', borderRadius: '15px' }}>
+        {activeTab === 'home' && <h2>Witaj w PandyHub! Co dziś robimy?</h2>}
+        {activeTab === 'mapa' && <h2>Nasza lokalizacja</h2>}
+        {activeTab === 'zadania' && <h2>Wspólne zadania</h2>}
+        {activeTab === 'quiz' && <h2>Quiz dla zakochanych</h2>}
       </div>
     </div>
   );
